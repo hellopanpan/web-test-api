@@ -1,0 +1,17 @@
+{
+  "name": "web-test-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.13.3",
+    "mongoose": "^4.12.1",
+    "ejs": "~2.5.7"
+  },
+  "scripts": {
+    "server": "node app.js",
+    "pm2-server": "pm2 start npm --name douban_server --watch -- run server"
+  },
+  "author": "",
+  "license": "ISC"
+}
