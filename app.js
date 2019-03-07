@@ -4,41 +4,7 @@ var path = require('path');
 var http = require('http');
 // 建立 express 实例
 var app = express();
-
-// 引入并创建数据库 
-var mongoose = require("./mongo.js")
-let doubanSchema = new mongoose.Schema({ //table 模式
-  picIndex:{
-    type:String,
-		default: "douban"
-  },
-	piclink:{
-		type:String,
-		default: "douban"
-	},
-	picsrc:{
-		type: String,
-		default: "douban"
-	},
-	title:{
-		type: String,
-		default: "douban"
-	},
-	titlelink:{
-		type: String,
-		default: "douban"
-	},
-	person:{
-		type: String,
-		default: "douban"
-	},
-	rate:{
-		type: String,
-		default: "douban"
-	},
-});
-let doubanMusicModel = mongoose.model('doubanMusic', doubanSchema);// doubanMusic 集合名称；集合的结构对象
-
+var mongoose = require("./mongodb/mongo.js")
 // 启动服务
 var server = http.createServer(app, (req, res) => {
   console.log('app is running at port 3000');
