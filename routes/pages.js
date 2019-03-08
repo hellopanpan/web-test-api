@@ -57,7 +57,8 @@ router.get('/update', function(req, response, next) {
   // 更新
   let wherestr = {'name' : 'panpan'};
   let updatestr = {'name': 'zzzz'};
-  Pages.update(wherestr, updatestr, (err, res) => {
+  // updateMany 更新全部
+  Pages.updateMany(wherestr, {$set: updatestr}, (err, res) => {
     if (err) {
       console.log("Error:" + err);
     }
