@@ -10,6 +10,7 @@
   },
   "scripts": {
     "server": "node app.js",
+    "debug": "node debug app.js",
     "pm2-server": "pm2 start npm --name douban_server --watch -- run server"
   },
   "author": "",

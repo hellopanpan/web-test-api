@@ -2,9 +2,12 @@
 var express = require('express');
 var path = require('path');
 var http = require('http');
+
+// 数据库mongodb初始化
+var mongoose = require("./mongodb/mongo.js")
+
 // 建立 express 实例
 var app = express();
-var mongoose = require("./mongodb/mongo.js")
 // 启动服务
 var server = http.createServer(app, (req, res) => {
   console.log('app is running at port 3000');
@@ -28,6 +31,8 @@ app.all('*', function(req, res, next) {
 // 使用routes
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var pagesRouter = require('./routes/pages');
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/pages', pagesRouter);
 

@@ -2,23 +2,42 @@ var express = require('express');
 var router = express.Router();
 
 // 引入并创建数据库 
-var User = require("../mongodb/user.js")
+var User = require("../mongodb/mongo.user.js")
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, response, next) {
   let userI = new User({
     name: 'hh3',
-    age: '2633'
+    age: '2633',
+    score: '6666'
   })
-  userI.save((err, res) => {
+  // 插入
+  // userI.save((err, res) => {
+  //   if (err) {
+  //     console.log("Error:" + err);
+  //   }
+  //   else {
+  //     console.log("Res:" + res);
+  //   }
+  // })
+
+  // 删除
+  // User.remove((err, res) => {
+  //   if (err) {
+  //     console.log("Error:" + err);
+  //   }
+  //   else {
+  //     console.log("Res:" + res);
+  //   }
+  // })
+  User.find({}).limit(5).exec((err, res) => {
     if (err) {
       console.log("Error:" + err);
     }
     else {
-      console.log("Res:" + res);
+      response.send(res);
     }
   })
-  res.send('respond with a resource');
 });
 
 module.exports = router;
