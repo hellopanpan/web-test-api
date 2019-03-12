@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-
+// var bodyParser= require("body-parser");
+// var jsonParser = bodyParser.json();
 // 引入并创建数据库 
-var User = require("../mongodb/mongo.user.js")
 
 /* GET users listing. */
 router.get('/', function(req, response, next) {
@@ -11,25 +11,6 @@ router.get('/', function(req, response, next) {
     age: '2633',
     score: '6666'
   })
-  // 插入
-  // userI.save((err, res) => {
-  //   if (err) {
-  //     console.log("Error:" + err);
-  //   }
-  //   else {
-  //     console.log("Res:" + res);
-  //   }
-  // })
-
-  // 删除
-  // User.remove((err, res) => {
-  //   if (err) {
-  //     console.log("Error:" + err);
-  //   }
-  //   else {
-  //     console.log("Res:" + res);
-  //   }
-  // })
   User.find({}).limit(5).exec((err, res) => {
     if (err) {
       console.log("Error:" + err);
@@ -39,5 +20,39 @@ router.get('/', function(req, response, next) {
     }
   })
 });
+// 登录接口
+router.post('/login', (req, res, next) => {
+  if(!req.body) return res.sendStatus(400);
+  console.log(req.signedCookies)
+  try{
+    if (req.body.username == 'panpan' && req.body.password == '123456') {
+      let data = {
+        code: '0',
+        data: {
+          msg: 'yes'
+        },
+        msg: 'success'
+      }
+      res.cookie('user', 'xpanpan', {
+        signed: true,
+        maxAge: 600000
+      })
+      res.send(JSON.stringify(data))
+    } else {
+      let data = {
+        code: '1',
+        data: {
+          msg: 'no'
+        },
+        msg: 'no admin user! plz check it again!'
+      }
+      res.send(JSON.stringify(data))
+    }
+  } catch(e) {
+    console.log('err' + e)
+    res.sendStatus(500);
+  }
+  
+})
 
 module.exports = router;
