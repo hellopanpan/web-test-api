@@ -97,15 +97,24 @@ router.get('/', function(req, response, next) {
 });
 
 // 删除
-router.get('/remove', function(req, response, next) {
+router.post('/remove', function(req, response, next) {
+  let wherestr = {'_id' : { $in: req.body.ids}};
   // 删除
-  let wherestr = {};
+  console.log(req.body.ids)
   Pages.remove(wherestr, (err, res) => {
     if (err) {
       console.log("Error:" + err);
+      res,sendStatus(500)
     }
     else {
-      response.send('remove success');
+      let data = {
+        code: '0',
+        data: {
+          msg: 'remove success'
+        },
+        msg: 'yes'
+      }
+      response.send(JSON.stringify(data))
     }
   })
 });

@@ -2,7 +2,7 @@
 var express = require('express');
 var path = require('path');
 var http = require('http');
-
+var multiparty = require('multiparty');
 // 数据库mongodb初始化
 var mongoose = require("./mongodb/mongo.js")
 
@@ -62,4 +62,20 @@ var pagesRouter = require('./routes/pages');
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/pages', pagesRouter);
+app.post('/post', function(req, res, next) {
+  //生成multiparty对象，并配置上传目标路径
+  var form = new multiparty.Form({uploadDir: './public/images'});
+  form.parse(req, function(err, fields, files) {
+    var filesTmp = JSON.stringify(files);
+		console.log(filesTmp)
+    if(err){
+      console.log('parse error: ' + err);
+    } else {
+      testJson = eval("(" + filesTmp+ ")"); 
+      console.log(testJson.file[0].path);
+      res.json({imgSrc:testJson.file[0].path})
+      console.log('rename ok');
+    }
+  });
+})
 
