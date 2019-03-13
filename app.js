@@ -61,7 +61,7 @@ var usersRouter = require('./routes/users');
 var pagesRouter = require('./routes/pages');
 var postRouter = require('./routes/post');
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/pages', pagesRouter);
-app.use('/post',postRouter)
+app.use('/webtest/users', usersRouter);
+app.use('/webtest/pages', pagesRouter);
+app.use('/webtest/post',postRouter)
 
