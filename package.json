@@ -14,7 +14,7 @@
   "scripts": {
     "server": "node app.js",
     "debug": "node debug app.js",
-    "pm2-server": "pm2 start npm --name douban_server --watch -- run server"
+    "pm2-server": "pm2 start npm --name web_test_api --watch -- run server"
   },
   "author": "",
   "license": "ISC"
