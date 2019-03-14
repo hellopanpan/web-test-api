@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', {host: 'http://static.xpanpan.com/webstatic'});
+  res.render('index', {host: 'https://xpanpan.com/webstatic'});
 });
 
 
